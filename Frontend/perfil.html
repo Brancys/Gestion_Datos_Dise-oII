@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="perfil.css"> <!-- Asegúrate de enlazar tus estilos -->
+</head>
+
+<body>
+    <div class="container">
+        <h1>Perfil del Usuario</h1>
+        <div class="perfil-info">
+            <div class="perfil-info__details">
+                <div class="perfil-info-item">
+                    <strong>Tipo de Documento:</strong> <span id="tipoDocumento">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Número de Documento:</strong> <span id="nroDocumento">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Primer Nombre:</strong> <span id="nombre1">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Segundo Nombre:</strong> <span id="nombre2">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Apellidos:</strong> <span id="apellidos">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Fecha de Nacimiento:</strong> <span id="fechaNacimiento">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Género:</strong> <span id="genero">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Correo Electrónico:</strong> <span id="email">Cargando...</span>
+                </div>
+                <div class="perfil-info-item">
+                    <strong>Celular:</strong> <span id="celular">Cargando...</span>
+                </div>
+            </div>
+            <div class="perfil-info-img-top">
+                <div class="perfil-info__image">
+                    <img id="fotoPerfil" src="#" alt="Foto de Perfil" style="display: none;">
+                </div>
+                <div>
+                    <p id="toponomia">Cargando toponimia...</p>
+                </div>
+            </div>
+        </div>
+        <button onclick="window.location.href = './index.html'">Volver</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+            const nroDocumento = params.get('nroDocumento');
+
+            if (nroDocumento) {
+                fetch(`http://localhost:3005/consultar/users/${nroDocumento}`, { method: 'GET' })
+                    .then(response => response.json())
+                    .then(usuario => {
+                        const fotoPerfil = document.getElementById('fotoPerfil');
+                        if (usuario.foto) {
+                            fotoPerfil.src = usuario.foto;
+                            fotoPerfil.style.display = 'block';
+                        }
+
+                        document.getElementById('nombre1').textContent = usuario.primerNombre;
+                        document.getElementById('nombre2').textContent = usuario.segundoNombre;
+                        document.getElementById('apellidos').textContent = usuario.apellidos;
+                        document.getElementById('email').textContent = usuario.correoElectronico;
+                        document.getElementById('celular').textContent = usuario.celular;
+                        document.getElementById('tipoDocumento').textContent = usuario.tipoDocumento;
+                        document.getElementById('nroDocumento').textContent = usuario.nroDocumento;
+                        document.getElementById('fechaNacimiento').textContent = new Date(usuario.fechaNacimiento).toLocaleDateString();
+                        document.getElementById('genero').textContent = usuario.genero;
+
+                        // Hacer fetch a la API de toponimia usando el primer nombre
+                        return fetch(`http://localhost:3020/toponimia?nombre=${usuario.primerNombre}`, { method: 'GET' });
+                    })
+                    .then(response => response.json())
+                    .then(toponimiaData => {
+                        document.getElementById('toponomia').textContent = toponimiaData;
+                    })
+                    .catch(error => {
+                        document.getElementById('toponomia').textContent = 'Servicio de toponomía no disponible.';
+                        // console.error('Error al cargar la información:', error);
+                        // alert('No se pudo cargar la información completa.');
+                    });
+            } else {
+                alert('No se encontró el número de documento.');
+            }
+        });
+    </script>
+</body>
+
+</html>

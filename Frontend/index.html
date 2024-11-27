@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Datos Personales</title>
+    <link rel="stylesheet" href="assets/fonts/style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <p class="logo__title">Gestor de Datos Personales</p>
+        </div>
+        <nav class="nav">
+            <ul class="nav__items">
+                <li id="users" class="active">
+                    <a href="index.html">Users</a>
+                </li>
+                <li id="log">
+                    <a href="log.html">Logs</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-1">
+            <section class="noc">
+                <div class="filter-container" id="filterContainer">
+                    <h2>Filtros</h2>
+                    <br>
+                    <form id="filterForm">
+                        <div class="form-group">
+                            <label><strong>Genero:</strong></label><br>
+                            <div class="gen">
+                                <label for="Masculino">Masculino</label>
+                                <input type="checkbox" id="Masculino" name="masculino" value="Masculino">
+                            </div>
+                            <div class="gen">
+                                <label for="Femenino">Femenino</label>
+                                <input type="checkbox" id="Femenino" name="femenino" value="Femenino">
+                            </div>
+                            <div class="gen">
+                                <label for="No binario">No binario</label>
+                                <input type="checkbox" id="No binario" name="No binario" value="No binario">
+                            </div>
+                            <div class="gen">
+                                <label for="NA">NA</label>
+                                <input type="checkbox" id="NA" name="NA" value="NA">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Tipo de Documento:</strong></label>
+                            <select id="documentType" name="documentType">
+                                <option value="">Seleccione un tipo</option>
+                                <option value="Cedula">Cédula</option>
+                                <option value="Tarjeta de identidad">Tarjeta de Identidad</option>
+                            </select>
+                        </div>
+                        <button type="button" onclick="applyFilter()" id="apply">Aplicar</button>
+                        <button type="button" onclick="clearFilters()">Limpiar todos los filtros</button>
+                    </form>
+                </div>
+                <div class="menosc">
+                    <div class="section-1__search-and-create">
+                        <div class="search-and-create__search">
+                            <input type="text" id="searchInput" placeholder="Consultar nro documento...">
+                            <button id="loadAllBtn" style="display: none;"><span class="icon-clear"></span></button>
+                            <!-- Botón para cargar todos los usuarios -->
+                            <button id="searchBtn"><span class="icon-search"></span></button>
+                        </div>
+                        <div>
+                            <button class="search-and-create__create" id="create_btn">Crear Usuario</button>
+                            <!-- <button class="toggle-button" onclick="toggleFilters()">Filtros</button> -->
+                        </div>
+                    </div>
+                    <article class="section-1__viewusers">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Tipo de Documento</th>
+                                    <th>Nro. de Documento</th>
+                                    <th>Primer Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Accion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </article>
+                </div>
+            </section>
+            <article>
+                <form id="formulario" class="form">
+                    <div class="form__formulario">
+                        <span class="icon-clear" id="formulario__cerrar"></span>
+                        <div class="formulario__foto">
+                            <label class="label" for="foto">Foto de perfil:</label>
+                            <input type="file" name="foto" id="foto">
+                            <span id="errorImagen"></span>
+                        </div>
+                        <div class="formulario__documento">
+                            <div>
+                                <label class="label" for="tipodoc">Tipo de Documento: <span
+                                        class="required">*</span></label>
+                                <select name="tipodoc" id="tipodoc">
+                                    <option value=""></option>
+                                    <option value="Cedula">Cedula</option>
+                                    <option value="Tarjeta de identidad">Tarjeta de identidad</option>
+                                </select>
+                                <span id="errortDoc"></span>
+                            </div>
+                            <div>
+                                <label class="label" for="documento"> Nro. de Documento: <span
+                                        class="required">*</span></label>
+                                <input type="text" id="documento" name="documento" maxlength="10">
+                                <span id="errorDoc"></span>
+                            </div>
+                        </div>
+
+                        <div class="formulario__nombre">
+                            <div class="formulario__nombre__1nombre">
+                                <label class="label" for="1nombre"> Primer Nombre: <span
+                                        class="required">*</span></label>
+                                <input type="text" id="1nombre" name="1nombre" maxlength="30">
+                                <span id="error1Nombre"></span>
+                            </div>
+
+                            <div class="formulario__nombre__2nombre">
+                                <label class="label" for="2nombre">Segundo Nombre:</label>
+                                <input type="text" id="2nombre" name="2nombre" maxlength="30">
+                                <span id="error2Nombre"></span>
+                            </div>
+                        </div>
+
+                        <div class="formulario__apellido">
+                            <label class="label" for="apellido">Apellido: <span class="required">*</span></label>
+                            <input type="text" id="apellido" name="apellido" maxlength="60">
+                            <span id="errorApellido"></span>
+                        </div>
+
+                        <div class="formulario__nacimiento-genero">
+                            <div>
+                                <label class="label" for="nacimiento">Fecha de Nacimiento: <span
+                                        class="required">*</span></label>
+                                <input type="date" id="nacimiento" name="nacimiento">
+                                <span id="errorFecha"></span>
+                            </div>
+                            <div>
+                                <label class="label" for="genero">Género: <span class="required">*</span></label>
+                                <select name="genero" id="genero">
+                                    <option value=""></option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                    <option value="No binario">No binario</option>
+                                    <option value="NA">Prefiero no responder</option>
+                                </select>
+                                <span id="errorGen"></span>
+                            </div>
+
+                        </div>
+
+                        <div class="formulario__correo">
+                            <label class="label" for="email">Correo Electrónico: <span
+                                    class="required">*</span></label></label>
+                            <input type="text" id="email" name="email">
+                            <span id="errorEmail"></span>
+                        </div>
+
+                        <div class="formulario__celular">
+                            <label class="label" for="celular">Celular: <span class="required">*</span></label>
+                            <input type="text" id="tel" name="tel" maxlength="10">
+                            <span id="errorCel"></span>
+                        </div>
+                        <button id="formButton" class="formulario__submit" type="submit">Enviar</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <b>Gestor de Datos Personales</b>
+        </p>
+        <p>
+            Proyecto realizado para <strong>Diseño de Software II</strong>
+        </p>
+        <p class="integrantes">
+            <b>Realizado por:</b> 
+            <list>
+                <li>Natalia de la Rans</li>
+                <li>Brancys Barrios Suárez</li>
+                <li>Juan Pablo Pineda </li>
+            </list>
+        </p>
+    </footer>
+
+    <!-- <script src="script.js"></script> -->
+    <script src="script-form.js"></script>
+</body>
+
+</html>

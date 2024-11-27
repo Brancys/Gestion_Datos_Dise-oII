@@ -1,0 +1,52 @@
+services:
+  consultar:
+    build: ./consultar
+    volumes:
+      - ./consultar:/app
+    ports:
+      - "3005:3005"
+    networks:
+      - internal-network
+
+  crear:
+    build: ./crear
+    volumes:
+      - ./crear:/app
+    ports:
+      - "3010:3010"
+    networks:
+      - internal-network
+
+  logs:
+    build: ./logss
+    volumes:
+      - ./logss:/app
+    ports:
+      - "3015:3015"
+    networks:
+      - internal-network
+
+  toponomia:
+    build: ./toponimia
+    volumes:
+      - ./toponimia:/app
+    ports:
+      - "3020:3020"
+    networks:
+      - internal-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - internal-network
+      
+networks:
+  internal-network:
+  
+volumes:
+  mongo-data:

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Datos Personales</title>
+    <link rel="stylesheet" href="assets\fonts\style-log.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <p class="logo__title">Gestor de Datos Personales</p>
+        </div>
+        <nav class="nav">
+            <ul class="nav__items">
+                <li id="users">
+                    <a href="index.html">Users</a>
+                </li>
+                <li id="log" class="active">
+                    <a href="log.html">Logs</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section-1">
+            <article class="section-1__filters">
+                <button class="toggle-button" onclick="toggleFilters()">Filtros</button>
+                <div class="filter-container" id="filterContainer" style="display: none;">
+                    <form id="filterForm">
+                        <div class="form-group">
+                            <label><strong>Acciones:</strong></label><br>
+                            <input type="checkbox" id="Create" name="status" value="Create">
+                            <label for="Create">Create</label>
+                            <input type="checkbox" id="Update" name="Update" value="Update">
+                            <label for="Update">Update</label>
+                            <input type="checkbox" id="Delete" name="Delete" value="Delete">
+                            <label for="Delete">Delete</label>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Buscar por documento:</strong></label>
+                            <input type="text" id="documentSearch" name="documentSearch"
+                                placeholder="Ingresa un número de documento">
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Tipo de Documento:</strong></label>
+                            <select id="documentType" name="documentType">
+                                <option value="">Seleccione un tipo</option>
+                                <option value="Cedula">Cédula</option>
+                                <option value="Tarjeta de identidad">Tarjeta de Identidad</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><strong>Fecha:</strong></label><br>
+                            <input type="date" id="startDate" name="startDate">
+                            <span> - </span>
+                            <input type="date" id="endDate" name="endDate">
+                        </div>
+                        <button type="button" onclick="applyFilter()">Aplicar</button>
+                        <button type="button" onclick="clearFilters()">Limpiar todos los filtros</button>
+                    </form>
+                </div>
+            </article>
+            <article class="section-1__viewlog">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Fecha de transacción</th>
+                            <th>Documento</th>
+                            <th>Tipo de documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>
+            <b>Gestor de Datos Personales</b>
+        </p>
+        <p>
+            Proyecto realizado para <strong>Diseño de Software II</strong>
+        </p>
+        <p class="integrantes">
+            <b>Realizado por:</b> Daniel Olivares, Alejandro Salas, Cristian Chavez y Valeria Jimenez.
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

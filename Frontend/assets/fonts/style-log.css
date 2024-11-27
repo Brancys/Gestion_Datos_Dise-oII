@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('icomoon.eot?j77h5i');
+    src: url('icomoon.eot?j77h5i#iefix') format('embedded-opentype'),
+        url('icomoon.ttf?j77h5i') format('truetype'),
+        url('icomoon.woff?j77h5i') format('woff'),
+        url('icomoon.svg?j77h5i#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak-as: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: system-ui, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    display: flex;
+    text-align: center;
+    padding: 1rem;
+    justify-content: space-between;
+    background-color: white;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo__title {
+    color: #004080;
+    font-weight: bold;
+    align-items: center;
+}
+
+.nav__items {
+    display: flex;
+    list-style-type: none;
+    background-color: #cce0f5;
+    padding: 0.3rem 0.3rem;
+    border-radius: 100px;
+}
+
+.nav__items li{
+    align-items: center;
+    justify-content: center;
+    padding-inline: 2rem;
+    padding-bottom: 8px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.nav__items li.active {
+    color: white;
+    background-color: #004080;
+}
+
+.nav__items li.active a {
+    color: white;
+}
+
+.nav__items li a {
+    font-size: 12px;
+    margin-top: 5px;
+    color: black;
+    text-decoration: none;
+}
+
+.section-1{
+    margin: 8rem 4rem;
+}
+
+.section-1__filters {
+    margin-bottom: 1rem;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+button:active {
+    animation: pulse 0.3s ease;
+}
+
+.section-1__viewlog {
+    margin: 0 auto;
+    width: 90vw;
+    height: 80vh;
+    border: 2px solid gray;
+    border-radius: 10px;
+    overflow: auto;
+    margin-bottom: 5rem;
+}
+
+footer {
+    background-color: white;
+    margin-top: 50px;
+    padding: 2rem;
+    text-align: center;
+    font-size: 14px;
+}
+
+footer p b {
+    color: #5ebea3;
+}
+
+footer .integrantes {
+    margin-top: 10px;
+    font-size: 11px;
+}
+
+.icon-clear:before {
+    content: "\e902";
+}
+
+.icon-search:before {
+    content: "\e901";
+}
+
+.icon-trash:before {
+    content: "\f1f8";
+}
+
+.icon-edit:before {
+    content: "\e900";
+}
+
+.section-1__viewlog::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.section-1__viewlog::-webkit-scrollbar-thumb {
+    border-radius: 0.5rem;
+    background-color: #004080;
+    visibility: hidden;
+}
+
+.section-1__viewlog:hover::-webkit-scrollbar-thumb {
+    visibility: visible;
+}
+table {
+    background-color: #fff5;
+    width: 100%;
+}
+
+table, th, td {
+    text-align: center;
+    padding: 1rem;
+    border-collapse: collapse;
+}
+thead th {
+    background-color: #dad9dbfe;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e8eef5;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    background-color: #004080;
+    color: white;
+    border: none;
+    border-radius: 200px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.filter-container {
+    display: none;
+    position: absolute;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 400px;
+    margin-left: 1.2rem
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+button {
+    margin-right: 10px;
+    padding: 10px;
+    border: none;
+    background-color: #004080;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#documentSearch, #documentType {
+    padding: .2rem .5rem;
+}
+

@@ -1,0 +1,24 @@
+{
+  "name": "crear",
+  "version": "1.0.0",
+  "description": "",
+  "main": "crear.actions.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "cloudinary": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.4.0",
+    "mongose": "^0.0.2-security",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.1"
+  }
+}
