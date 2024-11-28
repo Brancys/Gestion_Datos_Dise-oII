@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="perfil.css"> <!-- Asegúrate de enlazar tus estilos -->
+    <link rel="stylesheet" href="perfil.css">
 </head>
 
 <body>
@@ -53,7 +53,10 @@
         <button onclick="window.location.href = './index.html'">Volver</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <script>
+        
         document.addEventListener('DOMContentLoaded', function () {
             const params = new URLSearchParams(window.location.search);
             const nroDocumento = params.get('nroDocumento');
@@ -67,7 +70,10 @@
                             fotoPerfil.src = usuario.foto;
                             fotoPerfil.style.display = 'block';
                         }
-
+                        const fechaUTC = new Date(usuario.fechaNacimiento);
+                        const fechaSinAjuste = fechaUTC.toISOString().split('T')[0];
+                        const partes = fechaSinAjuste.split('-');
+                        const fechaFormateada = `${partes[2]}/${partes[1]}/${partes[0]}`;
                         document.getElementById('nombre1').textContent = usuario.primerNombre;
                         document.getElementById('nombre2').textContent = usuario.segundoNombre;
                         document.getElementById('apellidos').textContent = usuario.apellidos;
@@ -75,7 +81,7 @@
                         document.getElementById('celular').textContent = usuario.celular;
                         document.getElementById('tipoDocumento').textContent = usuario.tipoDocumento;
                         document.getElementById('nroDocumento').textContent = usuario.nroDocumento;
-                        document.getElementById('fechaNacimiento').textContent = new Date(usuario.fechaNacimiento).toLocaleDateString();
+                        document.getElementById('fechaNacimiento').textContent = fechaFormateada;
                         document.getElementById('genero').textContent = usuario.genero;
 
                         // Hacer fetch a la API de toponimia usando el primer nombre
@@ -83,12 +89,11 @@
                     })
                     .then(response => response.json())
                     .then(toponimiaData => {
-                        document.getElementById('toponomia').textContent = toponimiaData;
+                        const formattedHTML = marked.parse(toponimiaData);
+                        document.getElementById('toponomia').innerHTML = formattedHTML;
                     })
                     .catch(error => {
                         document.getElementById('toponomia').textContent = 'Servicio de toponomía no disponible.';
-                        // console.error('Error al cargar la información:', error);
-                        // alert('No se pudo cargar la información completa.');
                     });
             } else {
                 alert('No se encontró el número de documento.');

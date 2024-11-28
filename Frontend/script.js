@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         })
         .then(data => {
+            data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             const tabla = document.querySelector('.section-1__viewlog tbody');  // Asume que tienes una tabla para logs
             data.forEach(log => {
                 const fila = document.createElement('tr');
@@ -23,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <td>${new Date(log.timestamp).toLocaleDateString()}</td>
                 <td>${log.nroDocumento}</td>
                 <td>${log.tipoDocumento}</td>
+                <td>Admin</td>
             `;
                 tabla.appendChild(fila);
             });
@@ -104,6 +106,7 @@ function applyFilter() {
             return response.json();
         })
         .then(data => {
+            data.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
             const tabla = document.querySelector('.section-1__viewlog tbody');
             tabla.innerHTML = ''; // Limpiar la tabla antes de añadir los nuevos resultados
             data.forEach(log => {
@@ -114,6 +117,7 @@ function applyFilter() {
                 <td>${new Date(log.timestamp).toLocaleDateString()}</td>
                 <td>${log.nroDocumento}</td>
                 <td>${log.tipoDocumento}</td>
+                <td>Admin</td>
             `;
                 tabla.appendChild(fila);
             });
@@ -133,8 +137,6 @@ function clearFilters() {
     alert('Filtros limpiados');
     window.location.reload(); // Recargar la página para mostrar todos los logs
 }
-
-
 
 
 
