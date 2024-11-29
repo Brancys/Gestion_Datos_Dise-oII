@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 //let dbConnected = false;
 
-mongoose.connect("mongodb+srv://brancysb:QPA1hy2HN2QBMJAJ@cluster0.sgvtt.mongodb.net/test?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log("Conexión a MongoDB exitosa");
     })
